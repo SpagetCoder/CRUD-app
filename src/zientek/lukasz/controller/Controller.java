@@ -47,17 +47,9 @@ public class Controller
     {
         do
         {
-            try
-            {          
-                HighSchool highSchool = prepareHighSchool();                                   
-                database.createHighSchool(highSchool);
-                view.print("High school added");         
-            }
-            catch(InvalidInputException ex)
-            {
-                view.print("Error while adding highschool");
-            }
-           
+            HighSchool highSchool = prepareHighSchool();                                   
+            database.createHighSchool(highSchool);
+            view.print("High school added");         
             view.print("Press (n) to add next high school, anything else to get back to main menu");
             
         }while("n".equalsIgnoreCase(scanner.nextLine()));      
@@ -69,18 +61,10 @@ public class Controller
     private void addCity()
     {
         do
-        {
-            try
-            {          
-                City city = prepareCity();                                   
-                database.createCity(city);
-                view.print("City added");         
-            }
-            catch(InvalidInputException ex)
-            {
-                view.print("Error while adding city");
-            }
-           
+        {  
+            City city = prepareCity();                                   
+            database.createCity(city);
+            view.print("City added");         
             view.print("Press (n) to add next city, anything else to get back to main menu");
             
         }while("n".equalsIgnoreCase(scanner.nextLine()));      
@@ -98,35 +82,32 @@ public class Controller
                 
             while(!correctId)
             {
-                view.print("Provide id");
                 int id = prepareId();
                 highSchool = database.readHighSchool(id);
             
-                if(highSchool == null)
+                if(id == 0)
+                {
+                    view.print("Leaving update menu...");
+                    return;
+                }
+                
+                else if(highSchool == null)
                 {
                     view.print("No such id found. Please try again");        
-                }  
-            
+                }              
+                       
                 else
                     correctId = true;
             }
-           
-            try
-            {          
-                HighSchool highSchoolUpdated = prepareHighSchool();                                   
-                highSchool.setName(highSchoolUpdated.getName());
-                highSchool.setFounded(highSchoolUpdated.getFounded());
-                highSchool.setStutendsCount(highSchoolUpdated.getStutendsCount());
-                highSchool.setPassRate(highSchoolUpdated.getPassRate());
-                highSchool.setCity(highSchoolUpdated.getCity());
-                database.updateHighSchool(highSchool);                            
-                view.print("High school updated");         
-            }
-            catch(InvalidInputException ex)
-            {
-                view.print("Error while adding highschool");
-            }  
-            
+                  
+            HighSchool highSchoolUpdated = prepareHighSchool();                                   
+            highSchool.setName(highSchoolUpdated.getName());
+            highSchool.setFounded(highSchoolUpdated.getFounded());
+            highSchool.setStutendsCount(highSchoolUpdated.getStutendsCount());
+            highSchool.setPassRate(highSchoolUpdated.getPassRate());
+            highSchool.setCity(highSchoolUpdated.getCity());
+            database.updateHighSchool(highSchool);                            
+            view.print("High school updated");         
             view.print("Press (n) to add update, anything else to get back to main menu");
    
         }while("n".equalsIgnoreCase(scanner.nextLine()));                               
@@ -144,33 +125,30 @@ public class Controller
                 
             while(!correctId)
             {
-                view.print("Provide id");
                 int id = prepareId();
                 city = database.readCity(id);
-            
-                if(city == null)
+
+                if(id == 0)
+                {
+                    view.print("Leaving update menu...");
+                    return;
+                }
+                                
+                else if(city == null)
                 {
                     view.print("No such id found. Please try again");        
                 }  
-            
+                          
                 else
                     correctId = true;
             }
            
-            try
-            {          
-                City cityUpdated = prepareCity();                                   
-                city.setName(cityUpdated.getName());
-                city.setFounded(cityUpdated.getFounded());
-                city.setPopulation(cityUpdated.getPopulation());
-                database.updateCity(city);                            
-                view.print("City updated");         
-            }
-            catch(InvalidInputException ex)
-            {
-                view.print("Error while adding highschool");
-            }  
-            
+            City cityUpdated = prepareCity();                                   
+            city.setName(cityUpdated.getName());
+            city.setFounded(cityUpdated.getFounded());
+            city.setPopulation(cityUpdated.getPopulation());
+            database.updateCity(city);                            
+            view.print("City updated");         
             view.print("Press (n) to update again, anything else to get back to main menu");
    
         }while("n".equalsIgnoreCase(scanner.nextLine()));                               
@@ -188,14 +166,19 @@ public class Controller
                 
             while(!correctId)
             {
-                view.print("Provide id");
                 int id = prepareId();
                 highSchool = database.readHighSchool(id);
-            
-                if(highSchool == null)
+
+                if (id == 0)
+                {
+                    view.print("Leaving delete menu...");
+                    return;
+                }
+                
+                else if(highSchool == null)
                 {
                     view.print("No such id found. Please try again");        
-                }  
+                } 
             
                 else
                     correctId = true;
@@ -220,14 +203,19 @@ public class Controller
                 
             while(!correctId)
             {
-                view.print("Provide id");
                 int id = prepareId();
                 city = database.readCity(id);
-            
-                if(city == null)
+                    
+                if(id == 0)
+                {
+                    view.print("Leaving delete menu...");
+                    return;
+                }
+                
+                else if(city == null)
                 {
                     view.print("No such id found. Please try again");        
-                }  
+                }
             
                 else
                     correctId = true;
@@ -254,6 +242,7 @@ public class Controller
         {
             try
             {
+                view.print("Provide id (0 to get back to main menu)");
                 id = Integer.parseInt(scanner.nextLine());
                 correctId = true;
             }
@@ -270,9 +259,8 @@ public class Controller
     /**
      * Method used to prepare high school before adding it into database
      * @return highschool class
-     * @throws InvalidInputException 
      */
-    private HighSchool prepareHighSchool() throws InvalidInputException
+    private HighSchool prepareHighSchool()
     {
         HighSchool highschool = new HighSchool(); 
         boolean rightInput= false;
@@ -392,7 +380,7 @@ public class Controller
      * @return city class
      * @throws InvalidInputException 
      */
-    private City prepareCity() throws InvalidInputException
+    private City prepareCity()
     {
         City city = new City(); 
         boolean rightInput= false;
@@ -472,7 +460,13 @@ public class Controller
             id = prepareId();
             highSchool = database.readHighSchool(id);
             
-            if(highSchool == null)
+            if(id == 0)
+            {
+                view.print("Leaving read menu...");
+                return;
+            }  
+            
+            else if(highSchool == null)
             {
                 view.print("No such id found. Please try again");        
             }  
@@ -507,7 +501,13 @@ public class Controller
             id = prepareId();
             city = database.readCity(id);
             
-            if(city == null)
+            if(id == 0)
+            {
+                view.print("Leaving read menu...");
+                return;
+            }  
+            
+            else if(city == null)
             {
                 view.print("No such id found. Please try again");        
             }  
