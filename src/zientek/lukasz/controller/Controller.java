@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package zientek.lukasz.controller;
 
 import java.text.ParseException;
@@ -15,20 +10,39 @@ import zientek.lukasz.model.HighSchool;
 import zientek.lukasz.view.View;
 
 /**
- *
- * @author Luke
+ * Controller class responsible for taking and sending input to other components
+ * @author Lukasz Zientek
+ * @version 1.0.0
  */
 public class Controller 
 {
-    private View view = new View();   
+    /**
+     * Used for displaying message to the user
+     */
+    private View view = new View(); 
+
+    /**
+     * Takes data from the user
+     */
     private Scanner scanner = new Scanner(System.in);   
+    
+    /**
+     * Used to interact with the database
+     */
     private Database database;
 
+    /**
+     * Constractor of the controller class
+     * @param database used to interact with the database
+     */
     public Controller(Database database) 
     {
         this.database = database;
     }
     
+    /**
+     * Method for adding new high schools into database
+     */
     private void addHighSchool()
     {
         do
@@ -49,6 +63,9 @@ public class Controller
         }while("n".equalsIgnoreCase(scanner.nextLine()));      
     }
     
+     /**
+     * Method for adding new cities into database
+     */
     private void addCity()
     {
         do
@@ -69,6 +86,9 @@ public class Controller
         }while("n".equalsIgnoreCase(scanner.nextLine()));      
     }
     
+     /**
+     * Method for updating high schools in the database
+     */
     private void updateHighSchool()
     {     
         do
@@ -112,6 +132,9 @@ public class Controller
         }while("n".equalsIgnoreCase(scanner.nextLine()));                               
     }
     
+     /**
+     * Method for updating cities in the database
+     */
     private void updateCity()
     {     
         do
@@ -153,6 +176,9 @@ public class Controller
         }while("n".equalsIgnoreCase(scanner.nextLine()));                               
     }
     
+    /**
+     * Method for deleting high schools from the database
+     */
     private void deleteHighSchool()
     {
         do
@@ -182,7 +208,10 @@ public class Controller
         }while("n".equalsIgnoreCase(scanner.nextLine()));
     }
     
-        private void deleteCity()
+    /**
+     * Method for deleting cities form the database
+     */
+    private void deleteCity()
     {
         do
         {
@@ -210,7 +239,12 @@ public class Controller
             
         }while("n".equalsIgnoreCase(scanner.nextLine()));
     }
-          
+         
+    /**
+     * Method used to take input form the user and check 
+     * if provided input is a number
+     * @return id
+     */
     private int prepareId()
     {
         boolean correctId = false;
@@ -233,6 +267,11 @@ public class Controller
         return id;
     }
     
+    /**
+     * Method used to prepare high school before adding it into database
+     * @return highschool class
+     * @throws InvalidInputException 
+     */
     private HighSchool prepareHighSchool() throws InvalidInputException
     {
         HighSchool highschool = new HighSchool(); 
@@ -348,6 +387,11 @@ public class Controller
        return highschool;   
     }
     
+    /**
+     * Method used to prepare city class before adding it into database 
+     * @return city class
+     * @throws InvalidInputException 
+     */
     private City prepareCity() throws InvalidInputException
     {
         City city = new City(); 
@@ -405,11 +449,17 @@ public class Controller
        return city;   
     } 
        
+    /**
+     * Method used to display all high schools which are in database
+     */
     private void showAllHighSchools()
     {
         view.printHighSchool(database.readAllHighSchools());
     }
     
+    /**
+     * Method used to display high school with given id
+     */
     private void showHighScholId()
     {
         boolean correctId = false;   
@@ -434,11 +484,17 @@ public class Controller
         view.printHighSchoolId(database.readHighSchool(id));
     }
      
+    /**
+     * Method used to display all cities which are in database
+     */
     private void showAllCities()
     {
         view.printCity(database.readAllCities());
     }
     
+    /**
+     * Method used to display city with given id
+     */
     private void showCityId()
     {
         boolean correctId = false;   
@@ -463,6 +519,9 @@ public class Controller
         view.printCityId(database.readCity(id));
     }
     
+    /**
+     * Method used to display cities by query
+     */
     private void showCityQuery()
     {
         view.print("Provide query parameters (to skip leave empty)");
@@ -513,6 +572,9 @@ public class Controller
         
     }
     
+    /**
+     * Method used to display high schools by query
+     */
     private void showHighSchoolQuery()
     {
         view.print("Provide query parameters (to skip leave empty)");
@@ -602,6 +664,9 @@ public class Controller
         view.printHighSchool(database.readHighSchoolsQuery(name.isEmpty() ? null : name, founded,passRate,studentsCount,cityId));        
     }
     
+    /**
+     * Method which allows user to execute CRUD 
+     */
     public void mainMenu()
     {      
         boolean endOfProgram = false;
@@ -658,9 +723,11 @@ public class Controller
         }
     }
     
+    /**
+     * Prints information about available commands
+     */
     private void showMainMenu()
     {
-        clearScreen();
         view.print("CRUD app menu");
         view.print("1. Add high school");
         view.print("2. Update high school");
@@ -675,12 +742,5 @@ public class Controller
         view.print("11. Read city by id");
         view.print("12. Read city by query");    
         view.print("0. Exit the program");  
-    }
-    
-    public static void clearScreen() 
-    {  
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
-    }  
-    
+    } 
 }
