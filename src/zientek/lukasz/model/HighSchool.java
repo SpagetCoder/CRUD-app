@@ -21,32 +21,57 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * High school entity
+ * @author Lukasz Zientek
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "high_school")
 @NamedQueries({@NamedQuery(name = HighSchool.FIND_ALL, query = "SELECT hs FROM HighSchool hs")})
 public class HighSchool implements Serializable
 {  
-    
+    /**
+     * Key for query used to find all high schools
+     */
     public static final String FIND_ALL= "HighSchool.findAll";
     
+    /**
+     * Unique id
+     */
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    /**
+     * Name of the school
+     */
     @Column(name = "name")
     private String name;
        
+    /**
+     * Foundation year
+     */
     @Column(name = "foundation_year")
     @Temporal(TemporalType.DATE)
     private Date founded;
     
+    /**
+     * Pass rate of final exam
+     */
     @Column(name = "pass_rate")
     private Double passRate;
     
+    /**
+     * Number of students
+     */
     @Column(name = "number_of_students")
     private Long studentsCount;
     
+    /**
+     * City to which high school belongs to
+     */
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;

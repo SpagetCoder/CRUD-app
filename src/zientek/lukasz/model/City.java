@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package zientek.lukasz.model;
 
 import java.io.Serializable;
@@ -24,31 +19,50 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- *
- * @author Luke
+ * City entity
+ * @author Lukasz Zientek
+ * @version 1.0.0
  */
 @Entity
 @Table(name="city")
 @NamedQueries({@NamedQuery(name = City.FIND_ALL, query = "SELECT c FROM City c")})
 public class City implements Serializable
 {
+    /**
+     * Key for query used to find all cities
+     */
     public static final String FIND_ALL = "City.findAll";
    
+    /**
+     * Unique id
+     */
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    /**
+     * Name of the city
+     */
     @Column(name = "name")
     private String name;
        
+    /**
+     * Foundation year
+     */
     @Column(name = "foundation_year")
     @Temporal(TemporalType.DATE)
     private Date founded;
     
+    /**
+     * Population of the city
+     */
     @Column(name = "population")
     private Long population;
     
+    /**
+     * High schools which belong to this city
+     */
     @OneToMany(mappedBy = "city", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<HighSchool> highSchool;
 

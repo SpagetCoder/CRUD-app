@@ -17,7 +17,10 @@ public class View
      */
     public void printHighSchool(List <HighSchool> hs)
     {
-        System.out.println(hs);
+        if(hs.size() == 0)
+            System.out.println("none");
+        else
+            System.out.println(hs);
     }
     
     /**
@@ -35,7 +38,10 @@ public class View
      */
     public void printCity(List <City> city)
     {
-        System.out.println(city);
+        if(city.size() == 0)
+            System.out.println("none");
+        else
+            System.out.println(city);
     }
     
     /**

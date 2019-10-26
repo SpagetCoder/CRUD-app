@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package zientek.lukasz;
 
 import javax.persistence.EntityManagerFactory;
@@ -11,22 +7,24 @@ import zientek.lukasz.controller.Controller;
 import zientek.lukasz.database.Database;
 
 /**
- *
- * @author Luke
+ * Contains main function of the program
+ * @author Lukasz Zientek
+ * @version 1.0.0
  */
 public class Main 
 {
-    
+    /**
+     * Main function of the program
+     * @param args Arguments given in command line.
+     */
     public static void main(String[] args) 
     {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("LabPU");        
-        Database db = new Database(emf.createEntityManager());
-        
+        Database db = new Database(emf.createEntityManager());        
         Controller controller = new Controller(db);
         controller.mainMenu();
         
         db.clear();
-        emf.close();
-                   
+        emf.close();                 
     }
 }

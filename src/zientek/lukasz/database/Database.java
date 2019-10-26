@@ -59,7 +59,7 @@ public class Database
        
     /**
      * Removes an entity in transaction and clears cache
-     * @param emf 
+     * @param emf Entiy to delete
      */
     private void delete(Object emf)
     {
