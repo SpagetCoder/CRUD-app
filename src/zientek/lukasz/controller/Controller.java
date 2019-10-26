@@ -456,7 +456,6 @@ public class Controller
                 
         while(!correctId)
         {
-            view.print("Provide id");
             id = prepareId();
             highSchool = database.readHighSchool(id);
             
@@ -497,7 +496,6 @@ public class Controller
                 
         while(!correctId)
         {
-            view.print("Provide id");
             id = prepareId();
             city = database.readCity(id);
             
