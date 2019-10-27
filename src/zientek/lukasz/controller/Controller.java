@@ -108,7 +108,7 @@ public class Controller
             highSchool.setCity(highSchoolUpdated.getCity());
             database.updateHighSchool(highSchool);                            
             view.print("High school updated");         
-            view.print("Press (n) to add update, anything else to get back to main menu");
+            view.print("Press (n) to update next high school, anything else to get back to main menu");
    
         }while("n".equalsIgnoreCase(scanner.nextLine()));                               
     }
@@ -149,7 +149,7 @@ public class Controller
             city.setPopulation(cityUpdated.getPopulation());
             database.updateCity(city);                            
             view.print("City updated");         
-            view.print("Press (n) to update again, anything else to get back to main menu");
+            view.print("Press (n) to update next city, anything else to get back to main menu");
    
         }while("n".equalsIgnoreCase(scanner.nextLine()));                               
     }
@@ -186,7 +186,7 @@ public class Controller
            
             database.deleteHighSchool(highSchool);
             view.print("High school deleted");                      
-            view.print("Press (n) to delete next, anything else to get back to main menu");
+            view.print("Press (n) to delete high school, anything else to get back to main menu");
             
         }while("n".equalsIgnoreCase(scanner.nextLine()));
     }
@@ -223,7 +223,7 @@ public class Controller
            
             database.deleteCity(city);
             view.print("City deleted");                      
-            view.print("Press (n) to delete next element, anything else to get back to main menu");
+            view.print("Press (n) to delete next city, anything else to get back to main menu");
             
         }while("n".equalsIgnoreCase(scanner.nextLine()));
     }
@@ -378,7 +378,6 @@ public class Controller
     /**
      * Method used to prepare city class before adding it into database 
      * @return city class
-     * @throws InvalidInputException 
      */
     private City prepareCity()
     {
